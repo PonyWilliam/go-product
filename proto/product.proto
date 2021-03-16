@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package product;
+
+option go_package = "proto;product";
+
+service Product {
+	rpc AddProduct(Request_ProductInfo)returns(Response_Product){}
+	rpc DelProduct(Request_ProductID)returns(Response_DelProduct){}
+	rpc ChangeProduct(Request_ProductInfo)returns(Response_Product){}//考虑状态变更
+	rpc FindProductByID(Request_ProductID)returns(Response_ProductInfo){}
+}
+message Request_ProductInfo{
+	int64 id = 1;//唯一ID
+	string product_name = 2;//名称
+	string product_rfid = 3;//rfid特征码
+	int64 product_level = 4;//物品等级
+	string product_description = 5;//物品描述信息
+	bool product_is = 6;//是否还在仓库
+	int64 product_belong_category = 7;//物品所属分类id
+	string product_location = 8;//物品最新位置,如果在库则不做记录
+	int64 product_belong_area = 9;//物品所在库房id
+	int64 product_belong_custom = 10;//借走的用户ID,状态变更记录在变更表。通过id快速追踪。
+	int64 image_id = 11;
+	bool is_important = 12;
+}
+
+message Response_Product{
+	string message = 1;
+}
+message Request_ProductID{
+	int64 id = 1;
+}
+message Response_DelProduct{
+	string message = 1;
+}
+message Response_ProductInfo{
+	Request_ProductInfo info = 1;
+}
+message Response_ProductInfos{
+	repeated Request_ProductInfo infos = 1;
+}
