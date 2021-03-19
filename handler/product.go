@@ -2,7 +2,6 @@ package handler
 
 import (
 	"context"
-	"github.com/PonyWilliam/go-common"
 	"github.com/PonyWilliam/go-product/domain/model"
 	service "github.com/PonyWilliam/go-product/domain/service"
 	products "github.com/PonyWilliam/go-product/proto"
@@ -69,49 +68,19 @@ func(p *Product)ChangeProduct(ctx context.Context,info *products.Request_Product
 func(p *Product)FindProductByID(ctx context.Context,req *products.Request_ProductID,rsp *products.Response_ProductInfo)error{
 	productMessage,err := p.ProductServices.FindProductByID(req.Id)
 	if err!=nil{
-		log.Error(err)
 		rsp = nil
-		return nil
+		return err
 	}
-	temp := &products.Response_ProductInfo{
-			Id: productMessage.ID,
-			ProductName: productMessage.ProductName,
-			ProductLevel: productMessage.Level,
-			ProductDescription: productMessage.ProductDescription,
-			ProductIs:productMessage.Is,
-			ProductBelongCategory: productMessage.Category,
-			ProductLocation: productMessage.Location,
-			ProductBelongArea: productMessage.BelongArea,
-			ProductBelongCustom: productMessage.BelongCustom,
-			ProductRfid: productMessage.Rfid,
-			ImageId: productMessage.ImageID,
-			IsImportant: productMessage.Important,
-		}
-	rsp = temp
+	SwapToProduct(productMessage,rsp)
 	return nil
 }
 func(p *Product)FindProductByRFID(ctx context.Context,req *products.Request_ProductRFID,rsp *products.Response_ProductInfo)error{
 	productMessage,err := p.ProductServices.FindProductByRFID(req.Rfid)
 	if err!=nil{
-		log.Error(err)
 		rsp = nil
-		return nil
+		return err
 	}
-	temp := &products.Response_ProductInfo{
-		Id :productMessage.ID,
-		ProductName: productMessage.ProductName,
-		ProductLevel: productMessage.Level,
-		ProductDescription: productMessage.ProductDescription,
-		ProductIs:productMessage.Is,
-		ProductBelongCategory: productMessage.Category,
-		ProductLocation: productMessage.Location,
-		ProductBelongArea: productMessage.BelongArea,
-		ProductBelongCustom: productMessage.BelongCustom,
-		ProductRfid: productMessage.Rfid,
-		ImageId: productMessage.ImageID,
-		IsImportant: productMessage.Important,
-	}
-	rsp = temp
+	SwapToProduct(productMessage,rsp)
 	return nil
 }
 //rpc AddProduct(Request_ProductInfo)returns(Response_Product);
@@ -130,7 +99,7 @@ func (p *Product)FindProductByName(ctx context.Context,req *products.Request_Pro
 	}
 	for _,v := range productMessages{
 		product := &products.Response_ProductInfo{}
-		_ = common.SwapTo(v,product)
+		SwapToProduct(v,product)
 		rsp.Infos = append(rsp.Infos,product)
 	}
 	return nil
@@ -143,7 +112,7 @@ func (p *Product)FindProductByArea(ctx context.Context,req *products.Request_Pro
 	}
 	for _,v := range productMessages{
 		product := &products.Response_ProductInfo{}
-		_ = common.SwapTo(v,product)
+		SwapToProduct(v,product)
 		rsp.Infos = append(rsp.Infos,product)
 	}
 	return nil
@@ -156,8 +125,35 @@ func (p *Product)FindProductByCustom(ctx context.Context,req *products.Request_P
 	}
 	for _,v := range productMessages{
 		product := &products.Response_ProductInfo{}
-		_ = common.SwapTo(v,product)
+		SwapToProduct(v,product)
 		rsp.Infos = append(rsp.Infos,product)
 	}
 	return nil
+}
+func (p *Product)FindAll(ctx context.Context,req *products.Request_Null,rsp *products.Response_ProductInfos)error{
+	productMessages,err := p.ProductServices.FindProductAll()
+	if err!=nil{
+		rsp.Infos = nil
+		return err
+	}
+	for _,v := range productMessages{
+		product := &products.Response_ProductInfo{}
+		SwapToProduct(v,product)
+		rsp.Infos = append(rsp.Infos,product)
+	}
+	return nil
+}
+func SwapToProduct(req model.Product,rsp *products.Response_ProductInfo){
+	rsp.Id = req.ID
+	rsp.ProductLevel = req.Level
+	rsp.ProductIs = req.Is
+	rsp.IsImportant = req.Important
+	rsp.ImageId = req.ImageID
+	rsp.ProductBelongCustom = req.BelongCustom
+	rsp.ProductBelongArea = req.BelongArea
+	rsp.ProductLocation = req.Location
+	rsp.ProductBelongCategory = req.Category
+	rsp.ProductDescription = req.ProductDescription
+	rsp.ProductRfid = req.Rfid
+	rsp.ProductName = req.ProductName
 }

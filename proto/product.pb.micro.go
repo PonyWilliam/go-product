@@ -50,6 +50,7 @@ type ProductService interface {
 	FindProductByName(ctx context.Context, in *Request_ProductName, opts ...client.CallOption) (*Response_ProductInfos, error)
 	FindProductByArea(ctx context.Context, in *Request_ProductArea, opts ...client.CallOption) (*Response_ProductInfos, error)
 	FindProductByCustom(ctx context.Context, in *Request_ProductCustom, opts ...client.CallOption) (*Response_ProductInfos, error)
+	FindAll(ctx context.Context, in *Request_Null, opts ...client.CallOption) (*Response_ProductInfos, error)
 }
 
 type productService struct {
@@ -144,6 +145,16 @@ func (c *productService) FindProductByCustom(ctx context.Context, in *Request_Pr
 	return out, nil
 }
 
+func (c *productService) FindAll(ctx context.Context, in *Request_Null, opts ...client.CallOption) (*Response_ProductInfos, error) {
+	req := c.c.NewRequest(c.name, "Product.FindAll", in)
+	out := new(Response_ProductInfos)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Product service
 
 type ProductHandler interface {
@@ -155,6 +166,7 @@ type ProductHandler interface {
 	FindProductByName(context.Context, *Request_ProductName, *Response_ProductInfos) error
 	FindProductByArea(context.Context, *Request_ProductArea, *Response_ProductInfos) error
 	FindProductByCustom(context.Context, *Request_ProductCustom, *Response_ProductInfos) error
+	FindAll(context.Context, *Request_Null, *Response_ProductInfos) error
 }
 
 func RegisterProductHandler(s server.Server, hdlr ProductHandler, opts ...server.HandlerOption) error {
@@ -167,6 +179,7 @@ func RegisterProductHandler(s server.Server, hdlr ProductHandler, opts ...server
 		FindProductByName(ctx context.Context, in *Request_ProductName, out *Response_ProductInfos) error
 		FindProductByArea(ctx context.Context, in *Request_ProductArea, out *Response_ProductInfos) error
 		FindProductByCustom(ctx context.Context, in *Request_ProductCustom, out *Response_ProductInfos) error
+		FindAll(ctx context.Context, in *Request_Null, out *Response_ProductInfos) error
 	}
 	type Product struct {
 		product
@@ -209,4 +222,8 @@ func (h *productHandler) FindProductByArea(ctx context.Context, in *Request_Prod
 
 func (h *productHandler) FindProductByCustom(ctx context.Context, in *Request_ProductCustom, out *Response_ProductInfos) error {
 	return h.ProductHandler.FindProductByCustom(ctx, in, out)
+}
+
+func (h *productHandler) FindAll(ctx context.Context, in *Request_Null, out *Response_ProductInfos) error {
+	return h.ProductHandler.FindAll(ctx, in, out)
 }

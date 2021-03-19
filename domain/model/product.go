@@ -5,7 +5,7 @@ type Product struct{
 	ProductDescription string `json:"product_description"`
 	Level int64 `json:"level"`
 	Category int64 `json:"category"`//指向categoryid
-	Important bool `json:"important"`//说明是否重要
+	Important bool `json:"important,bool"`//说明是否重要
 	Is bool `json:"is"`//是否在库
 	BelongCustom int64 `json:"belong_custom"`//当前所属用户ID
 	BelongArea int64 `json:"belong_area"`//所属库房

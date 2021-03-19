@@ -30,7 +30,7 @@ type Request_ProductName struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name"`
 }
 
 func (x *Request_ProductName) Reset() {
@@ -77,7 +77,7 @@ type Request_ProductArea struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Aid int64 `protobuf:"varint,1,opt,name=aid,proto3" json:"aid,omitempty"`
+	Aid int64 `protobuf:"varint,1,opt,name=aid,proto3" json:"aid"`
 }
 
 func (x *Request_ProductArea) Reset() {
@@ -124,7 +124,7 @@ type Request_ProductCustom struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Wid int64 `protobuf:"varint,1,opt,name=wid,proto3" json:"wid,omitempty"`
+	Wid int64 `protobuf:"varint,1,opt,name=wid,proto3" json:"wid"`
 }
 
 func (x *Request_ProductCustom) Reset() {
@@ -171,7 +171,7 @@ type Request_ProductCategory struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Cid int64 `protobuf:"varint,1,opt,name=cid,proto3" json:"cid,omitempty"`
+	Cid int64 `protobuf:"varint,1,opt,name=cid,proto3" json:"cid"`
 }
 
 func (x *Request_ProductCategory) Reset() {
@@ -256,30 +256,18 @@ type Request_ProductInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//	ID int64 `gorm:"primary_key;not_null;auto_increment"`
-	//	ProductName string `json:"product_name"`
-	//	ProductDescription string `json:"product_description"`
-	//	Level int64 `json:"level"`
-	//	Category int64 `json:"category"`//指向categoryid
-	//	Important bool `json:"important"`//说明是否重要
-	//	Is bool `json:"is"`//是否在库
-	//	BelongCustom int64 `json:"belong_custom"`//当前所属用户ID
-	//	BelongArea int64 `json:"belong_area"`//所属库房
-	//	Location string `json:"location"`//最新的定位信息
-	//	Rfid string `json:"rfid"`//rfid标记
-	//	ImageID int64 `json:"image_id"`//图片地址对应的id（可上传）
-	Id                    int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	ProductName           string `protobuf:"bytes,2,opt,name=product_name,json=productName,proto3" json:"product_name,omitempty"`
-	ProductDescription    string `protobuf:"bytes,3,opt,name=product_description,json=productDescription,proto3" json:"product_description,omitempty"`
-	ProductLevel          int64  `protobuf:"varint,4,opt,name=product_level,json=productLevel,proto3" json:"product_level,omitempty"`
-	ProductBelongCategory int64  `protobuf:"varint,5,opt,name=product_belong_category,json=productBelongCategory,proto3" json:"product_belong_category,omitempty"`
-	IsImportant           bool   `protobuf:"varint,6,opt,name=is_important,json=isImportant,proto3" json:"is_important,omitempty"`
-	ProductIs             bool   `protobuf:"varint,7,opt,name=product_is,json=productIs,proto3" json:"product_is,omitempty"`
-	ProductBelongCustom   int64  `protobuf:"varint,8,opt,name=product_belong_custom,json=productBelongCustom,proto3" json:"product_belong_custom,omitempty"`
-	ProductBelongArea     int64  `protobuf:"varint,9,opt,name=product_belong_area,json=productBelongArea,proto3" json:"product_belong_area,omitempty"` //物品所在库房id
-	ProductLocation       string `protobuf:"bytes,10,opt,name=product_location,json=productLocation,proto3" json:"product_location,omitempty"`         //物品最新位置,如果在库则不做记录
-	ProductRfid           string `protobuf:"bytes,11,opt,name=product_rfid,json=productRfid,proto3" json:"product_rfid,omitempty"`                     //rfid特征码
-	ImageId               int64  `protobuf:"varint,12,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
+	Id                    int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	ProductName           string `protobuf:"bytes,2,opt,name=product_name,json=productName,proto3" json:"product_name"`
+	ProductDescription    string `protobuf:"bytes,3,opt,name=product_description,json=productDescription,proto3" json:"product_description"`
+	ProductLevel          int64  `protobuf:"varint,4,opt,name=product_level,json=productLevel,proto3" json:"product_level"`
+	ProductBelongCategory int64  `protobuf:"varint,5,opt,name=product_belong_category,json=productBelongCategory,proto3" json:"product_belong_category"`
+	IsImportant           bool   `protobuf:"varint,6,opt,name=is_important,json=isImportant,proto3" json:"is_important"`
+	ProductIs             bool   `protobuf:"varint,7,opt,name=product_is,json=productIs,proto3" json:"product_is"`
+	ProductBelongCustom   int64  `protobuf:"varint,8,opt,name=product_belong_custom,json=productBelongCustom,proto3" json:"product_belong_custom"`
+	ProductBelongArea     int64  `protobuf:"varint,9,opt,name=product_belong_area,json=productBelongArea,proto3" json:"product_belong_area"` //物品所在库房id
+	ProductLocation       string `protobuf:"bytes,10,opt,name=product_location,json=productLocation,proto3" json:"product_location"`         //物品最新位置,如果在库则不做记录
+	ProductRfid           string `protobuf:"bytes,11,opt,name=product_rfid,json=productRfid,proto3" json:"product_rfid"`                     //rfid特征码
+	ImageId               int64  `protobuf:"varint,12,opt,name=image_id,json=imageId,proto3" json:"image_id"`
 }
 
 func (x *Request_ProductInfo) Reset() {
@@ -403,18 +391,18 @@ type Response_ProductInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                    int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	ProductName           string `protobuf:"bytes,2,opt,name=product_name,json=productName,proto3" json:"product_name,omitempty"`
-	ProductDescription    string `protobuf:"bytes,3,opt,name=product_description,json=productDescription,proto3" json:"product_description,omitempty"`
-	ProductLevel          int64  `protobuf:"varint,4,opt,name=product_level,json=productLevel,proto3" json:"product_level,omitempty"`
-	ProductBelongCategory int64  `protobuf:"varint,5,opt,name=product_belong_category,json=productBelongCategory,proto3" json:"product_belong_category,omitempty"`
-	IsImportant           bool   `protobuf:"varint,6,opt,name=is_important,json=isImportant,proto3" json:"is_important,omitempty"`
-	ProductIs             bool   `protobuf:"varint,7,opt,name=product_is,json=productIs,proto3" json:"product_is,omitempty"`
-	ProductBelongCustom   int64  `protobuf:"varint,8,opt,name=product_belong_custom,json=productBelongCustom,proto3" json:"product_belong_custom,omitempty"`
-	ProductBelongArea     int64  `protobuf:"varint,9,opt,name=product_belong_area,json=productBelongArea,proto3" json:"product_belong_area,omitempty"` //物品所在库房id
-	ProductLocation       string `protobuf:"bytes,10,opt,name=product_location,json=productLocation,proto3" json:"product_location,omitempty"`         //物品最新位置,如果在库则不做记录
-	ProductRfid           string `protobuf:"bytes,11,opt,name=product_rfid,json=productRfid,proto3" json:"product_rfid,omitempty"`                     //rfid特征码
-	ImageId               int64  `protobuf:"varint,12,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
+	Id                    int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	ProductName           string `protobuf:"bytes,2,opt,name=product_name,json=productName,proto3" json:"product_name"`
+	ProductDescription    string `protobuf:"bytes,3,opt,name=product_description,json=productDescription,proto3" json:"product_description"`
+	ProductLevel          int64  `protobuf:"varint,4,opt,name=product_level,json=productLevel,proto3" json:"product_level"`
+	ProductBelongCategory int64  `protobuf:"varint,5,opt,name=product_belong_category,json=productBelongCategory,proto3" json:"product_belong_category"`
+	IsImportant           bool   `protobuf:"varint,6,opt,name=is_important,json=isImportant,proto3" json:"is_important"`
+	ProductIs             bool   `protobuf:"varint,7,opt,name=product_is,json=productIs,proto3" json:"product_is"`
+	ProductBelongCustom   int64  `protobuf:"varint,8,opt,name=product_belong_custom,json=productBelongCustom,proto3" json:"product_belong_custom"`
+	ProductBelongArea     int64  `protobuf:"varint,9,opt,name=product_belong_area,json=productBelongArea,proto3" json:"product_belong_area"` //物品所在库房id
+	ProductLocation       string `protobuf:"bytes,10,opt,name=product_location,json=productLocation,proto3" json:"product_location"`         //物品最新位置,如果在库则不做记录
+	ProductRfid           string `protobuf:"bytes,11,opt,name=product_rfid,json=productRfid,proto3" json:"product_rfid"`                     //rfid特征码
+	ImageId               int64  `protobuf:"varint,12,opt,name=image_id,json=imageId,proto3" json:"image_id"`
 }
 
 func (x *Response_ProductInfo) Reset() {
@@ -538,7 +526,7 @@ type Request_ProductRFID struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Rfid string `protobuf:"bytes,1,opt,name=rfid,proto3" json:"rfid,omitempty"`
+	Rfid string `protobuf:"bytes,1,opt,name=rfid,proto3" json:"rfid"`
 }
 
 func (x *Request_ProductRFID) Reset() {
@@ -585,7 +573,7 @@ type Response_Product struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Message string `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	Message string `protobuf:"bytes,1,opt,name=message,proto3" json:"message"`
 }
 
 func (x *Response_Product) Reset() {
@@ -632,7 +620,7 @@ type Request_ProductID struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
 }
 
 func (x *Request_ProductID) Reset() {
@@ -679,7 +667,7 @@ type Response_DelProduct struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Message string `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	Message string `protobuf:"bytes,1,opt,name=message,proto3" json:"message"`
 }
 
 func (x *Response_DelProduct) Reset() {
@@ -726,7 +714,7 @@ type Response_ProductInfos struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Infos []*Response_ProductInfo `protobuf:"bytes,1,rep,name=infos,proto3" json:"infos,omitempty"`
+	Infos []*Response_ProductInfo `protobuf:"bytes,1,rep,name=infos,proto3" json:"infos"`
 }
 
 func (x *Response_ProductInfos) Reset() {
@@ -861,7 +849,7 @@ var file_proto_product_proto_rawDesc = []byte{
 	0x66, 0x6f, 0x73, 0x12, 0x33, 0x0a, 0x05, 0x69, 0x6e, 0x66, 0x6f, 0x73, 0x18, 0x01, 0x20, 0x03,
 	0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x70, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x2e, 0x52, 0x65, 0x73,
 	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x5f, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x49, 0x6e, 0x66,
-	0x6f, 0x52, 0x05, 0x69, 0x6e, 0x66, 0x6f, 0x73, 0x32, 0xff, 0x04, 0x0a, 0x07, 0x50, 0x72, 0x6f,
+	0x6f, 0x52, 0x05, 0x69, 0x6e, 0x66, 0x6f, 0x73, 0x32, 0xc1, 0x05, 0x0a, 0x07, 0x50, 0x72, 0x6f,
 	0x64, 0x75, 0x63, 0x74, 0x12, 0x45, 0x0a, 0x0a, 0x41, 0x64, 0x64, 0x50, 0x72, 0x6f, 0x64, 0x75,
 	0x63, 0x74, 0x12, 0x1c, 0x2e, 0x70, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x2e, 0x52, 0x65, 0x71,
 	0x75, 0x65, 0x73, 0x74, 0x5f, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x49, 0x6e, 0x66, 0x6f,
@@ -901,9 +889,13 @@ var file_proto_product_proto_rawDesc = []byte{
 	0x64, 0x75, 0x63, 0x74, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x5f, 0x50, 0x72, 0x6f,
 	0x64, 0x75, 0x63, 0x74, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x1a, 0x1e, 0x2e, 0x70, 0x72, 0x6f,
 	0x64, 0x75, 0x63, 0x74, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x5f, 0x50, 0x72,
-	0x6f, 0x64, 0x75, 0x63, 0x74, 0x49, 0x6e, 0x66, 0x6f, 0x73, 0x42, 0x0f, 0x5a, 0x0d, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x3b, 0x70, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x6f, 0x64, 0x75, 0x63, 0x74, 0x49, 0x6e, 0x66, 0x6f, 0x73, 0x12, 0x40, 0x0a, 0x07, 0x46, 0x69,
+	0x6e, 0x64, 0x41, 0x6c, 0x6c, 0x12, 0x15, 0x2e, 0x70, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x2e,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x5f, 0x4e, 0x75, 0x6c, 0x6c, 0x1a, 0x1e, 0x2e, 0x70,
+	0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x5f,
+	0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x49, 0x6e, 0x66, 0x6f, 0x73, 0x42, 0x0f, 0x5a, 0x0d,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x3b, 0x70, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -943,16 +935,18 @@ var file_proto_product_proto_depIdxs = []int32{
 	0,  // 6: product.Product.FindProductByName:input_type -> product.Request_ProductName
 	1,  // 7: product.Product.FindProductByArea:input_type -> product.Request_ProductArea
 	2,  // 8: product.Product.FindProductByCustom:input_type -> product.Request_ProductCustom
-	8,  // 9: product.Product.AddProduct:output_type -> product.Response_Product
-	10, // 10: product.Product.DelProduct:output_type -> product.Response_DelProduct
-	8,  // 11: product.Product.ChangeProduct:output_type -> product.Response_Product
-	6,  // 12: product.Product.FindProductByID:output_type -> product.Response_ProductInfo
-	6,  // 13: product.Product.FindProductByRFID:output_type -> product.Response_ProductInfo
-	11, // 14: product.Product.FindProductByName:output_type -> product.Response_ProductInfos
-	11, // 15: product.Product.FindProductByArea:output_type -> product.Response_ProductInfos
-	11, // 16: product.Product.FindProductByCustom:output_type -> product.Response_ProductInfos
-	9,  // [9:17] is the sub-list for method output_type
-	1,  // [1:9] is the sub-list for method input_type
+	4,  // 9: product.Product.FindAll:input_type -> product.Request_Null
+	8,  // 10: product.Product.AddProduct:output_type -> product.Response_Product
+	10, // 11: product.Product.DelProduct:output_type -> product.Response_DelProduct
+	8,  // 12: product.Product.ChangeProduct:output_type -> product.Response_Product
+	6,  // 13: product.Product.FindProductByID:output_type -> product.Response_ProductInfo
+	6,  // 14: product.Product.FindProductByRFID:output_type -> product.Response_ProductInfo
+	11, // 15: product.Product.FindProductByName:output_type -> product.Response_ProductInfos
+	11, // 16: product.Product.FindProductByArea:output_type -> product.Response_ProductInfos
+	11, // 17: product.Product.FindProductByCustom:output_type -> product.Response_ProductInfos
+	11, // 18: product.Product.FindAll:output_type -> product.Response_ProductInfos
+	10, // [10:19] is the sub-list for method output_type
+	1,  // [1:10] is the sub-list for method input_type
 	1,  // [1:1] is the sub-list for extension type_name
 	1,  // [1:1] is the sub-list for extension extendee
 	0,  // [0:1] is the sub-list for field type_name

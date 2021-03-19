@@ -13,6 +13,7 @@ service Product {
 	rpc FindProductByName(Request_ProductName)returns(Response_ProductInfos);
 	rpc FindProductByArea(Request_ProductArea)returns(Response_ProductInfos);
 	rpc FindProductByCustom(Request_ProductCustom)returns(Response_ProductInfos);
+	rpc FindAll(Request_Null)returns(Response_ProductInfos);
 }
 message Request_ProductName{
 	string name = 1;
@@ -28,18 +29,6 @@ message Request_ProductCategory{
 }
 message Request_Null{}
 message Request_ProductInfo{
-//	ID int64 `gorm:"primary_key;not_null;auto_increment"`
-//	ProductName string `json:"product_name"`
-//	ProductDescription string `json:"product_description"`
-//	Level int64 `json:"level"`
-//	Category int64 `json:"category"`//指向categoryid
-//	Important bool `json:"important"`//说明是否重要
-//	Is bool `json:"is"`//是否在库
-//	BelongCustom int64 `json:"belong_custom"`//当前所属用户ID
-//	BelongArea int64 `json:"belong_area"`//所属库房
-//	Location string `json:"location"`//最新的定位信息
-//	Rfid string `json:"rfid"`//rfid标记
-//	ImageID int64 `json:"image_id"`//图片地址对应的id（可上传）
 	int64 id = 1;
 	string product_name = 2;
 	string product_description = 3;
