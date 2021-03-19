@@ -2,10 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="689c9a4a-6b48-4583-acef-84e783b26751" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../ProductWeb/.idea/ProductWeb.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProductWeb/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProductWeb/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProductWeb/default.etcd/member/snap/db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProductWeb/default.etcd/member/wal/0.tmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProductWeb/default.etcd/member/wal/0000000000000000-0000000000000000.wal" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProductWeb/go.sum" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProductWeb/proto/ProductWeb/ProductWeb.pb.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProductWeb/proto/ProductWeb/ProductWeb.pb.micro.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../WorkWeb" beforeDir="false" afterPath="$PROJECT_DIR$/../WorkWeb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../borrow/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../borrow/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../borrow/domain/repository/product_log.go" beforeDir="false" afterPath="$PROJECT_DIR$/../borrow/domain/repository/product_log.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../borrow/domain/server/product_log.go" beforeDir="false" afterPath="$PROJECT_DIR$/../borrow/domain/server/product_log.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../borrow/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/../borrow/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../borrow/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/../borrow/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../borrow/handler/borrow.go" beforeDir="false" afterPath="$PROJECT_DIR$/../borrow/handler/borrow.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../borrow/proto/borrow.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../borrow/proto/borrow.pb.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../borrow/proto/borrow.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/../borrow/proto/borrow.pb.micro.go" afterDir="false" />
@@ -14,6 +25,13 @@
       <change beforePath="$PROJECT_DIR$/../borrowLogs/domain/model/logs.go" beforeDir="false" afterPath="$PROJECT_DIR$/../borrowLogs/domain/model/logs.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../borrowLogs/domain/repository/logs.go" beforeDir="false" afterPath="$PROJECT_DIR$/../borrowLogs/domain/repository/logs.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../borrowLogs/domain/server/logs.go" beforeDir="false" afterPath="$PROJECT_DIR$/../borrowLogs/domain/server/logs.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../borrowLogs/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/../borrowLogs/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../borrowLogs/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/../borrowLogs/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../borrowLogs/handler/borrowLogs.go" beforeDir="false" afterPath="$PROJECT_DIR$/../borrowLogs/handler/borrowLogs.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../borrowLogs/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../borrowLogs/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../borrowLogs/proto/borrowLogs.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../borrowLogs/proto/borrowLogs.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../borrowLogs/proto/borrowLogs.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/../borrowLogs/proto/borrowLogs.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../borrowLogs/proto/borrowLogs.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../borrowLogs/proto/borrowLogs.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../category/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../category/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../category/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../category/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../category/domain/model/category.go" beforeDir="false" afterPath="$PROJECT_DIR$/../category/domain/model/category.go" afterDir="false" />
@@ -25,7 +43,12 @@
       <change beforePath="$PROJECT_DIR$/../category/proto/category.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../category/proto/category.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/domain/repository/product.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/repository/product.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/service/product.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/service/product.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handler/product.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/product.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/product.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/product.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/product.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/product.pb.micro.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/product.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/product.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../workApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../workApi/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../workApi/handler/workApi.go" beforeDir="false" afterPath="$PROJECT_DIR$/../workApi/handler/workApi.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../workApi/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../workApi/main.go" afterDir="false" />

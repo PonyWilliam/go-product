@@ -31,7 +31,7 @@ func main() {
 		)
 
 	srv := micro.NewService(
-		micro.Name("go.micro.services.product"),
+		micro.Name("go.micro.service.product"),
 		micro.Version("latest"),
 		micro.Address("127.0.0.1:8090"),
 		micro.Registry(consulRegistry),

@@ -5,10 +5,11 @@ package product;
 option go_package = "proto;product";
 
 service Product {
-	rpc AddProduct(Request_ProductInfo)returns(Response_Product){}
-	rpc DelProduct(Request_ProductID)returns(Response_DelProduct){}
-	rpc ChangeProduct(Request_ProductInfo)returns(Response_Product){}//考虑状态变更
-	rpc FindProductByID(Request_ProductID)returns(Response_ProductInfo){}
+	rpc AddProduct(Request_ProductInfo)returns(Response_Product);
+	rpc DelProduct(Request_ProductID)returns(Response_DelProduct);
+	rpc ChangeProduct(Request_ProductInfo)returns(Response_Product);//考虑状态变更
+	rpc FindProductByID(Request_ProductID)returns(Response_ProductInfo);
+	rpc FindProductByRFID(Request_ProductRFID)returns(Response_ProductInfo);
 }
 message Request_ProductInfo{
 	int64 id = 1;//唯一ID
@@ -24,7 +25,9 @@ message Request_ProductInfo{
 	int64 image_id = 11;
 	bool is_important = 12;
 }
-
+message Request_ProductRFID{
+	string rfid = 1;
+}
 message Response_Product{
 	string message = 1;
 }

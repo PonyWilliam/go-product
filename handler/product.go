@@ -77,8 +77,6 @@ func(p *Product)ChangeProduct(ctx context.Context,info *products.Request_Product
 		Rfid: info.ProductRfid,
 		ImageID:info.ImageId,
 	}
-	fmt.Println(IProduct)
-	fmt.Println(IProduct.Is)
 	err := p.ProductServices.UpdateProductByID(info.Id,IProduct)
 	if err!=nil{
 		product.Message = err.Error()
@@ -93,7 +91,7 @@ func(p *Product)FindProductByID(ctx context.Context,req *products.Request_Produc
 	if err!=nil{
 		log.Error(err)
 		rsp.Info = nil
-		return err
+		return nil
 	}
 	/*
 	int64 id = 1;//唯一ID
@@ -123,6 +121,30 @@ func(p *Product)FindProductByID(ctx context.Context,req *products.Request_Produc
 			ImageId: productMessage.ImageID,
 			IsImportant: productMessage.Important,
 		}
+	rsp.Info = temp
+	return nil
+}
+func(p *Product)FindProductByRFID(ctx context.Context,req *products.Request_ProductRFID,rsp *products.Response_ProductInfo)error{
+	productMessage,err := p.ProductServices.FindProductByRFID(req.Rfid)
+	if err!=nil{
+		log.Error(err)
+		rsp.Info = nil
+		return nil
+	}
+	temp := &products.Request_ProductInfo{
+		Id: productMessage.ID,
+		ProductName: productMessage.ProductName,
+		ProductLevel: productMessage.Level,
+		ProductDescription: productMessage.ProductDescription,
+		ProductIs:productMessage.Is,
+		ProductBelongCategory: productMessage.Category,
+		ProductLocation: productMessage.Location,
+		ProductBelongArea: productMessage.BelongArea,
+		ProductBelongCustom: productMessage.BelongCustom,
+		ProductRfid: productMessage.Rfid,
+		ImageId: productMessage.ImageID,
+		IsImportant: productMessage.Important,
+	}
 	rsp.Info = temp
 	return nil
 }

@@ -15,6 +15,7 @@ type IProductServices interface {
 	FindProductByCustom(custom int64)(product []model.Product,err error)
 	FindProductByStay(is bool)(product []model.Product,err error)
 	FindProductByImportant(is bool)(product []model.Product,err error)
+	FindProductByRFID(rfid string)(product model.Product,err error)
 }
 func NewProductServices(repository repository.IProduct)IProductServices{
 	return &ProductServices{repository}
@@ -48,4 +49,7 @@ func(p *ProductServices) FindProductByStay(is bool)(product []model.Product,err 
 }
 func(p *ProductServices) FindProductByImportant(is bool)(product []model.Product,err error){
 	return p.productRepository.FindProductByImportant(is)
+}
+func(p *ProductServices) FindProductByRFID(rfid string)(product model.Product,err error){
+	return p.productRepository.FindProductByRFID(rfid)
 }

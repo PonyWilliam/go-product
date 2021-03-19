@@ -46,6 +46,7 @@ type ProductService interface {
 	DelProduct(ctx context.Context, in *Request_ProductID, opts ...client.CallOption) (*Response_DelProduct, error)
 	ChangeProduct(ctx context.Context, in *Request_ProductInfo, opts ...client.CallOption) (*Response_Product, error)
 	FindProductByID(ctx context.Context, in *Request_ProductID, opts ...client.CallOption) (*Response_ProductInfo, error)
+	FindProductByRFID(ctx context.Context, in *Request_ProductRFID, opts ...client.CallOption) (*Response_ProductInfo, error)
 }
 
 type productService struct {
@@ -100,6 +101,16 @@ func (c *productService) FindProductByID(ctx context.Context, in *Request_Produc
 	return out, nil
 }
 
+func (c *productService) FindProductByRFID(ctx context.Context, in *Request_ProductRFID, opts ...client.CallOption) (*Response_ProductInfo, error) {
+	req := c.c.NewRequest(c.name, "Product.FindProductByRFID", in)
+	out := new(Response_ProductInfo)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Product service
 
 type ProductHandler interface {
@@ -107,6 +118,7 @@ type ProductHandler interface {
 	DelProduct(context.Context, *Request_ProductID, *Response_DelProduct) error
 	ChangeProduct(context.Context, *Request_ProductInfo, *Response_Product) error
 	FindProductByID(context.Context, *Request_ProductID, *Response_ProductInfo) error
+	FindProductByRFID(context.Context, *Request_ProductRFID, *Response_ProductInfo) error
 }
 
 func RegisterProductHandler(s server.Server, hdlr ProductHandler, opts ...server.HandlerOption) error {
@@ -115,6 +127,7 @@ func RegisterProductHandler(s server.Server, hdlr ProductHandler, opts ...server
 		DelProduct(ctx context.Context, in *Request_ProductID, out *Response_DelProduct) error
 		ChangeProduct(ctx context.Context, in *Request_ProductInfo, out *Response_Product) error
 		FindProductByID(ctx context.Context, in *Request_ProductID, out *Response_ProductInfo) error
+		FindProductByRFID(ctx context.Context, in *Request_ProductRFID, out *Response_ProductInfo) error
 	}
 	type Product struct {
 		product
@@ -141,4 +154,8 @@ func (h *productHandler) ChangeProduct(ctx context.Context, in *Request_ProductI
 
 func (h *productHandler) FindProductByID(ctx context.Context, in *Request_ProductID, out *Response_ProductInfo) error {
 	return h.ProductHandler.FindProductByID(ctx, in, out)
+}
+
+func (h *productHandler) FindProductByRFID(ctx context.Context, in *Request_ProductRFID, out *Response_ProductInfo) error {
+	return h.ProductHandler.FindProductByRFID(ctx, in, out)
 }
