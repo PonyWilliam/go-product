@@ -47,6 +47,9 @@ type ProductService interface {
 	ChangeProduct(ctx context.Context, in *Request_ProductInfo, opts ...client.CallOption) (*Response_Product, error)
 	FindProductByID(ctx context.Context, in *Request_ProductID, opts ...client.CallOption) (*Response_ProductInfo, error)
 	FindProductByRFID(ctx context.Context, in *Request_ProductRFID, opts ...client.CallOption) (*Response_ProductInfo, error)
+	FindProductByName(ctx context.Context, in *Request_ProductName, opts ...client.CallOption) (*Response_ProductInfos, error)
+	FindProductByArea(ctx context.Context, in *Request_ProductArea, opts ...client.CallOption) (*Response_ProductInfos, error)
+	FindProductByCustom(ctx context.Context, in *Request_ProductCustom, opts ...client.CallOption) (*Response_ProductInfos, error)
 }
 
 type productService struct {
@@ -111,6 +114,36 @@ func (c *productService) FindProductByRFID(ctx context.Context, in *Request_Prod
 	return out, nil
 }
 
+func (c *productService) FindProductByName(ctx context.Context, in *Request_ProductName, opts ...client.CallOption) (*Response_ProductInfos, error) {
+	req := c.c.NewRequest(c.name, "Product.FindProductByName", in)
+	out := new(Response_ProductInfos)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productService) FindProductByArea(ctx context.Context, in *Request_ProductArea, opts ...client.CallOption) (*Response_ProductInfos, error) {
+	req := c.c.NewRequest(c.name, "Product.FindProductByArea", in)
+	out := new(Response_ProductInfos)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productService) FindProductByCustom(ctx context.Context, in *Request_ProductCustom, opts ...client.CallOption) (*Response_ProductInfos, error) {
+	req := c.c.NewRequest(c.name, "Product.FindProductByCustom", in)
+	out := new(Response_ProductInfos)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Product service
 
 type ProductHandler interface {
@@ -119,6 +152,9 @@ type ProductHandler interface {
 	ChangeProduct(context.Context, *Request_ProductInfo, *Response_Product) error
 	FindProductByID(context.Context, *Request_ProductID, *Response_ProductInfo) error
 	FindProductByRFID(context.Context, *Request_ProductRFID, *Response_ProductInfo) error
+	FindProductByName(context.Context, *Request_ProductName, *Response_ProductInfos) error
+	FindProductByArea(context.Context, *Request_ProductArea, *Response_ProductInfos) error
+	FindProductByCustom(context.Context, *Request_ProductCustom, *Response_ProductInfos) error
 }
 
 func RegisterProductHandler(s server.Server, hdlr ProductHandler, opts ...server.HandlerOption) error {
@@ -128,6 +164,9 @@ func RegisterProductHandler(s server.Server, hdlr ProductHandler, opts ...server
 		ChangeProduct(ctx context.Context, in *Request_ProductInfo, out *Response_Product) error
 		FindProductByID(ctx context.Context, in *Request_ProductID, out *Response_ProductInfo) error
 		FindProductByRFID(ctx context.Context, in *Request_ProductRFID, out *Response_ProductInfo) error
+		FindProductByName(ctx context.Context, in *Request_ProductName, out *Response_ProductInfos) error
+		FindProductByArea(ctx context.Context, in *Request_ProductArea, out *Response_ProductInfos) error
+		FindProductByCustom(ctx context.Context, in *Request_ProductCustom, out *Response_ProductInfos) error
 	}
 	type Product struct {
 		product
@@ -158,4 +197,16 @@ func (h *productHandler) FindProductByID(ctx context.Context, in *Request_Produc
 
 func (h *productHandler) FindProductByRFID(ctx context.Context, in *Request_ProductRFID, out *Response_ProductInfo) error {
 	return h.ProductHandler.FindProductByRFID(ctx, in, out)
+}
+
+func (h *productHandler) FindProductByName(ctx context.Context, in *Request_ProductName, out *Response_ProductInfos) error {
+	return h.ProductHandler.FindProductByName(ctx, in, out)
+}
+
+func (h *productHandler) FindProductByArea(ctx context.Context, in *Request_ProductArea, out *Response_ProductInfos) error {
+	return h.ProductHandler.FindProductByArea(ctx, in, out)
+}
+
+func (h *productHandler) FindProductByCustom(ctx context.Context, in *Request_ProductCustom, out *Response_ProductInfos) error {
+	return h.ProductHandler.FindProductByCustom(ctx, in, out)
 }

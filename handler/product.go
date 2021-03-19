@@ -2,32 +2,13 @@ package handler
 
 import (
 	"context"
-	"fmt"
+	"github.com/PonyWilliam/go-common"
 	"github.com/PonyWilliam/go-product/domain/model"
 	service "github.com/PonyWilliam/go-product/domain/service"
 	products "github.com/PonyWilliam/go-product/proto"
 	"github.com/micro/go-micro/v2/util/log"
 	"strconv"
 )
-/*
-package model
-type Product struct{
-	ID int64 `gorm:"primary_key;not_null;auto_increment"`
-	ProductName string `json:"product_name"`
-	ProductDescription string `json:"product_description"`
-	Level int64 `json:"level"`
-	Category int64 `json:"category"`//指向categoryid
-	Important bool `json:"important"`//说明是否重要
-	Is bool `json:"is"`//是否在库
-	BelongCustom int64 `json:"belong_custom"`//当前所属用户ID
-	BelongArea int64 `json:"belong_area"`//所属库房
-	Location string `json:"location"`//最新的定位信息
-	Rfid string `json:"rfid"`//rfid标记
-	ImageID int64 `json:"image_id"`//图片地址对应的id（可上传）
-}
-
-*/
-
 type Product struct{
 	ProductServices service.IProductServices
 }
@@ -63,7 +44,6 @@ func(p *Product)DelProduct(ctx context.Context,id *products.Request_ProductID,pr
 	return nil
 }
 func(p *Product)ChangeProduct(ctx context.Context,info *products.Request_ProductInfo,product *products.Response_Product)error{
-	fmt.Println(info.ProductIs)
 	IProduct := &model.Product{
 		ProductName: info.ProductName,
 		Level: info.ProductLevel,
@@ -90,24 +70,10 @@ func(p *Product)FindProductByID(ctx context.Context,req *products.Request_Produc
 	productMessage,err := p.ProductServices.FindProductByID(req.Id)
 	if err!=nil{
 		log.Error(err)
-		rsp.Info = nil
+		rsp = nil
 		return nil
 	}
-	/*
-	int64 id = 1;//唯一ID
-		string product_name = 2;//名称
-		string product_rfid = 3;//rfid特征码
-		int64 product_level = 4;//物品等级
-		string product_description = 5;//物品描述信息
-		bool product_is = 6;//是否还在仓库
-		int64 product_belong_category = 7;//物品所属分类id
-		string product_location = 8;//物品最新位置,如果在库则不做记录
-		int64 product_belong_area = 9;//物品所在库房id
-		int64 product_belong_custom = 10;//借走的用户ID,状态变更记录在变更表。通过id快速追踪。
-		int64 image_id = 11;
-		bool is_important = 12;
-	*/
-	temp := &products.Request_ProductInfo{
+	temp := &products.Response_ProductInfo{
 			Id: productMessage.ID,
 			ProductName: productMessage.ProductName,
 			ProductLevel: productMessage.Level,
@@ -121,18 +87,18 @@ func(p *Product)FindProductByID(ctx context.Context,req *products.Request_Produc
 			ImageId: productMessage.ImageID,
 			IsImportant: productMessage.Important,
 		}
-	rsp.Info = temp
+	rsp = temp
 	return nil
 }
 func(p *Product)FindProductByRFID(ctx context.Context,req *products.Request_ProductRFID,rsp *products.Response_ProductInfo)error{
 	productMessage,err := p.ProductServices.FindProductByRFID(req.Rfid)
 	if err!=nil{
 		log.Error(err)
-		rsp.Info = nil
+		rsp = nil
 		return nil
 	}
-	temp := &products.Request_ProductInfo{
-		Id: productMessage.ID,
+	temp := &products.Response_ProductInfo{
+		Id :productMessage.ID,
 		ProductName: productMessage.ProductName,
 		ProductLevel: productMessage.Level,
 		ProductDescription: productMessage.ProductDescription,
@@ -145,7 +111,53 @@ func(p *Product)FindProductByRFID(ctx context.Context,req *products.Request_Prod
 		ImageId: productMessage.ImageID,
 		IsImportant: productMessage.Important,
 	}
-	rsp.Info = temp
+	rsp = temp
 	return nil
 }
-// Call is a single request handler called via client.Call or the generated client code
+//rpc AddProduct(Request_ProductInfo)returns(Response_Product);
+//rpc DelProduct(Request_ProductID)returns(Response_DelProduct);
+//rpc ChangeProduct(Request_ProductInfo)returns(Response_Product);//考虑状态变更
+//rpc FindProductByID(Request_ProductID)returns(Response_ProductInfo);
+//rpc FindProductByRFID(Request_ProductRFID)returns(Response_ProductInfo);
+//rpc FindProductByName(Request_ProductName)returns(Response_ProductInfos);
+//rpc FindProductByArea(Request_ProductArea)returns(Response_ProductInfos);
+//rpc FindProductByCustom(Request_ProductCustom)returns(Response_ProductInfos);
+func (p *Product)FindProductByName(ctx context.Context,req *products.Request_ProductName,rsp *products.Response_ProductInfos)error{
+	productMessages,err := p.ProductServices.FindProductByName(req.Name)
+	if err!=nil{
+		rsp.Infos = nil
+		return err
+	}
+	for _,v := range productMessages{
+		product := &products.Response_ProductInfo{}
+		_ = common.SwapTo(v,product)
+		rsp.Infos = append(rsp.Infos,product)
+	}
+	return nil
+}
+func (p *Product)FindProductByArea(ctx context.Context,req *products.Request_ProductArea,rsp *products.Response_ProductInfos)error{
+	productMessages,err := p.ProductServices.FindProductByArea(req.Aid)
+	if err!=nil{
+		rsp.Infos = nil
+		return err
+	}
+	for _,v := range productMessages{
+		product := &products.Response_ProductInfo{}
+		_ = common.SwapTo(v,product)
+		rsp.Infos = append(rsp.Infos,product)
+	}
+	return nil
+}
+func (p *Product)FindProductByCustom(ctx context.Context,req *products.Request_ProductCustom,rsp *products.Response_ProductInfos)error{
+	productMessages,err := p.ProductServices.FindProductByCustom(req.Wid)
+	if err!=nil{
+		rsp.Infos = nil
+		return err
+	}
+	for _,v := range productMessages{
+		product := &products.Response_ProductInfo{}
+		_ = common.SwapTo(v,product)
+		rsp.Infos = append(rsp.Infos,product)
+	}
+	return nil
+}

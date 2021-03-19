@@ -13,7 +13,7 @@ type IProduct interface {
 	UpdateProductByID(id int64,data *model.Product)error
 	FindProductByID(ID int64)(*model.Product,error)
 	FindProductByName(name string)(product []model.Product,err error)
-	FindProductByArea(area string)(product []model.Product,err error)
+	FindProductByArea(area int64)(product []model.Product,err error)
 	FindProductByCustom(custom int64)(product []model.Product,err error)
 	FindProductByStay(is bool)(product []model.Product,err error)
 	FindProductByImportant(is bool)(product []model.Product,err error)
@@ -49,7 +49,7 @@ func(p *ProductRepository) FindProductByID(ID int64)(*model.Product,error){
 func(p *ProductRepository) FindProductByName(name string)(product []model.Product,err error){
 	return product,p.mysql.Where("ProductName = ?",name).Find(&product).Error
 }
-func(p *ProductRepository) FindProductByArea(area string)(product []model.Product,err error){
+func(p *ProductRepository) FindProductByArea(area int64)(product []model.Product,err error){
 	return product,p.mysql.Where("BelongArea = ?",area).Find(&product).Error
 }
 func(p *ProductRepository) FindProductByCustom(custom int64)(product []model.Product,err error){

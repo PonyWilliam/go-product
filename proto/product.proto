@@ -10,20 +10,62 @@ service Product {
 	rpc ChangeProduct(Request_ProductInfo)returns(Response_Product);//考虑状态变更
 	rpc FindProductByID(Request_ProductID)returns(Response_ProductInfo);
 	rpc FindProductByRFID(Request_ProductRFID)returns(Response_ProductInfo);
+	rpc FindProductByName(Request_ProductName)returns(Response_ProductInfos);
+	rpc FindProductByArea(Request_ProductArea)returns(Response_ProductInfos);
+	rpc FindProductByCustom(Request_ProductCustom)returns(Response_ProductInfos);
 }
+message Request_ProductName{
+	string name = 1;
+}
+message Request_ProductArea{
+	int64 aid = 1;
+}
+message Request_ProductCustom{
+	int64 wid = 1;
+}
+message Request_ProductCategory{
+	int64 cid = 1;
+}
+message Request_Null{}
 message Request_ProductInfo{
-	int64 id = 1;//唯一ID
-	string product_name = 2;//名称
-	string product_rfid = 3;//rfid特征码
-	int64 product_level = 4;//物品等级
-	string product_description = 5;//物品描述信息
-	bool product_is = 6;//是否还在仓库
-	int64 product_belong_category = 7;//物品所属分类id
-	string product_location = 8;//物品最新位置,如果在库则不做记录
+//	ID int64 `gorm:"primary_key;not_null;auto_increment"`
+//	ProductName string `json:"product_name"`
+//	ProductDescription string `json:"product_description"`
+//	Level int64 `json:"level"`
+//	Category int64 `json:"category"`//指向categoryid
+//	Important bool `json:"important"`//说明是否重要
+//	Is bool `json:"is"`//是否在库
+//	BelongCustom int64 `json:"belong_custom"`//当前所属用户ID
+//	BelongArea int64 `json:"belong_area"`//所属库房
+//	Location string `json:"location"`//最新的定位信息
+//	Rfid string `json:"rfid"`//rfid标记
+//	ImageID int64 `json:"image_id"`//图片地址对应的id（可上传）
+	int64 id = 1;
+	string product_name = 2;
+	string product_description = 3;
+	int64 product_level = 4;
+	int64 product_belong_category = 5;
+	bool is_important = 6;
+	bool product_is = 7;
+	int64 product_belong_custom = 8;
 	int64 product_belong_area = 9;//物品所在库房id
-	int64 product_belong_custom = 10;//借走的用户ID,状态变更记录在变更表。通过id快速追踪。
-	int64 image_id = 11;
-	bool is_important = 12;
+	string product_location = 10;//物品最新位置,如果在库则不做记录
+	string product_rfid = 11;//rfid特征码
+	int64 image_id = 12;
+}
+message Response_ProductInfo{
+	int64 id = 1;
+	string product_name = 2;
+	string product_description = 3;
+	int64 product_level = 4;
+	int64 product_belong_category = 5;
+	bool is_important = 6;
+	bool product_is = 7;
+	int64 product_belong_custom = 8;
+	int64 product_belong_area = 9;//物品所在库房id
+	string product_location = 10;//物品最新位置,如果在库则不做记录
+	string product_rfid = 11;//rfid特征码
+	int64 image_id = 12;
 }
 message Request_ProductRFID{
 	string rfid = 1;
@@ -37,9 +79,6 @@ message Request_ProductID{
 message Response_DelProduct{
 	string message = 1;
 }
-message Response_ProductInfo{
-	Request_ProductInfo info = 1;
-}
 message Response_ProductInfos{
-	repeated Request_ProductInfo infos = 1;
+	repeated Response_ProductInfo infos = 1;
 }
