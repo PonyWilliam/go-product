@@ -1,7 +1,6 @@
 package repository
 
 import (
-	"github.com/PonyWilliam/go-common"
 	model "github.com/PonyWilliam/go-product/domain/model"
 	"github.com/jinzhu/gorm"
 )
@@ -39,9 +38,21 @@ func(p *ProductRepository) DelProductByID(ID int64) error{
 	return p.mysql.Where("id = ?",ID).Delete(&model.Product{}).Error
 }
 func(p *ProductRepository) UpdateProductByID(id int64,data *model.Product) error{
-	temp := make(map[string]interface{})
-	_ = common.SwapTo(data, temp)
-	return p.mysql.Where("id = ?",id).Updates(temp).Error
+
+	temp := map[string]interface{}{
+		"ProductName":data.ProductName,
+		"ProductDescription":data.ProductDescription,
+		"Level":data.Level,
+		"Category":data.Category,
+		"Important":data.Important,
+		"Is":data.Is,
+		"BelongCustom":data.BelongCustom,
+		"BelongArea":data.BelongArea,
+		"Location":data.Location,
+		"Rfid":data.Rfid,
+		"ImageID":data.ImageID,
+	}
+	return p.mysql.Model(&model.Product{}).Where("id = ?",id).Updates(temp).Error
 }
 func(p *ProductRepository) FindProductByID(ID int64)(product model.Product,err error){
 	return product,p.mysql.Where("id = ?",ID).First(&product).Error
