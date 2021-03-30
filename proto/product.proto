@@ -13,6 +13,7 @@ service Product {
 	rpc FindProductByName(Request_ProductName)returns(Response_ProductInfos);
 	rpc FindProductByArea(Request_ProductArea)returns(Response_ProductInfos);
 	rpc FindProductByCustom(Request_ProductCustom)returns(Response_ProductInfos);
+	rpc FindProductByCategory(Request_ProductCategory)returns(Response_ProductInfos);
 	rpc FindAll(Request_Null)returns(Response_ProductInfos);
 }
 message Request_ProductName{

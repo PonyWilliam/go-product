@@ -143,6 +143,19 @@ func (p *Product)FindAll(ctx context.Context,req *products.Request_Null,rsp *pro
 	}
 	return nil
 }
+func (p *Product)FindProductByCategory(ctx context.Context,req *products.Request_ProductCategory,rsp *products.Response_ProductInfos)error{
+	productMessages,err := p.ProductServices.FindProductByCategory(req.Cid)
+	if err!=nil{
+		rsp.Infos = nil
+		return err
+	}
+	for _,v := range productMessages{
+		product := &products.Response_ProductInfo{}
+		SwapToProduct(v,product)
+		rsp.Infos = append(rsp.Infos,product)
+	}
+	return nil
+}
 func SwapToProduct(req model.Product,rsp *products.Response_ProductInfo){
 	rsp.Id = req.ID
 	rsp.ProductLevel = req.Level

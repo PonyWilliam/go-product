@@ -17,7 +17,9 @@ type IProduct interface {
 	FindProductByStay(is bool)(product []model.Product,err error)
 	FindProductByImportant(is bool)(product []model.Product,err error)
 	FindProductByRFID(rfid string)(product model.Product,err error)
+	FindProductByCategory(category_id int64)(products []model.Product,err error)
 	FindProductAll()([]model.Product,error)
+
 }
 func NewProductRepository(db *gorm.DB) IProduct{
 	return &ProductRepository{mysql: db}
@@ -38,7 +40,6 @@ func(p *ProductRepository) DelProductByID(ID int64) error{
 	return p.mysql.Where("id = ?",ID).Delete(&model.Product{}).Error
 }
 func(p *ProductRepository) UpdateProductByID(id int64,data *model.Product) error{
-
 	temp := map[string]interface{}{
 		"ProductName":data.ProductName,
 		"ProductDescription":data.ProductDescription,
@@ -72,14 +73,17 @@ func(p *ProductRepository) FindProductByStay(is bool)(product []model.Product,er
 	}
 	return product,p.mysql.Where("Is = ?",false).Find(&product).Error
 }
-func(p *ProductRepository) FindProductByImportant(is bool)(product []model.Product,err error){
+func(p *ProductRepository) FindProductByImportant(is bool)(products []model.Product,err error){
 	if is{
-		return product,p.mysql.Where("Important = ?",true).Find(&product).Error
+		return products,p.mysql.Where("Important = ?",true).Find(&products).Error
 	}
-	return product,p.mysql.Where("Important = ?",false).Find(&product).Error
+	return products,p.mysql.Where("Important = ?",false).Find(&products).Error
 }
 func(p *ProductRepository) FindProductByRFID(rfid string)(product model.Product,err error){
 	return product,p.mysql.Where("rfid = ?",rfid).First(&product).Error
+}
+func(p *ProductRepository) FindProductByCategory(category_id int64)(products []model.Product,err error){
+	return products,p.mysql.Where("category = ?",category_id).Find(&products).Error
 }
 func(p *ProductRepository) FindProductAll()(products []model.Product,err error){
 	return products,p.mysql.Model(&products).Find(&products).Error
