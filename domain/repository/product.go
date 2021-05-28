@@ -1,6 +1,8 @@
 package repository
 
 import (
+	"errors"
+	"fmt"
 	model "github.com/PonyWilliam/go-product/domain/model"
 	"github.com/jinzhu/gorm"
 )
@@ -34,6 +36,11 @@ func(p *ProductRepository) InitTable() error{
 	return p.mysql.CreateTable(&model.Product{}).Error
 }
 func(p *ProductRepository) AddProduct(product *model.Product) (int64,error){
+	temp := &model.Product{}
+	p.mysql.Model(product).Where("rfid = ?",product.Rfid).Find(&temp)
+	if temp.ID!=0{
+		return 0,errors.New(fmt.Sprintf("rfid:%s重复录入",product.Rfid))
+	}
 	return product.ID,p.mysql.Model(product).Create(&product).Error
 }
 func(p *ProductRepository) DelProductByID(ID int64) error{
@@ -62,6 +69,7 @@ func(p *ProductRepository) FindProductByName(name string)(product []model.Produc
 	return product,p.mysql.Where("product_name = ?",name).Find(&product).Error
 }
 func(p *ProductRepository) FindProductByArea(area int64)(product []model.Product,err error){
+	fmt.Println(area)
 	return product,p.mysql.Where("belong_area = ?",area).Find(&product).Error
 }
 func(p *ProductRepository) FindProductByCustom(custom int64)(product []model.Product,err error){

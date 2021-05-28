@@ -10,6 +10,6 @@ type Product struct{
 	BelongCustom int64 `json:"belong_custom"`//当前所属用户ID
 	BelongArea int64 `json:"belong_area"`//所属库房
 	Location string `json:"location"`//最新的定位信息
-	Rfid string `json:"rfid"`//rfid标记
+	Rfid string `json:"rfid" gorm:"unique_index;not_null"`//rfid标记
 	ImageID int64 `json:"image_id"`//图片地址对应的id（可上传）
 }

@@ -11,7 +11,8 @@ proto:
 	ls proto/*.pb.go | xargs -n1 -IX bash -c 'sed s/,omitempty// X > X.tmp && mv X{.tmp,}'
 .PHONY: build
 build:
-	go build -o product *.go
+	# GOOS=linux GOARCH=amd64 go build -o .
+	docker build . -t ponywilliam/go-product:latest
 
 .PHONY: test
 test:
@@ -19,4 +20,6 @@ test:
 
 .PHONY: docker
 docker:
-	docker build . -t product:latest
+	docker build -t ponywilliam/go-product .
+	docker tag ponywilliam/go-product ponywilliam/go-product
+	docker push ponywilliam/go-product
