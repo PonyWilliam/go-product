@@ -25,6 +25,7 @@ func(p *Product)AddProduct(ctx context.Context,info *products.Request_ProductInf
 		Location: info.ProductLocation,
 		Rfid: info.ProductRfid,
 		ImageID:info.ImageId,
+		ThreeD: info.ThreeUrl,
 	}
 	id,err := p.ProductServices.AddProduct(IProduct)
 	if err!=nil{
@@ -55,6 +56,7 @@ func(p *Product)ChangeProduct(ctx context.Context,info *products.Request_Product
 		Location: info.ProductLocation,
 		Rfid: info.ProductRfid,
 		ImageID:info.ImageId,
+		ThreeD: info.ThreeUrl,
 	}
 	err := p.ProductServices.UpdateProductByID(info.Id,IProduct)
 	if err!=nil{
