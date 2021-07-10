@@ -169,4 +169,5 @@ func SwapToProduct(req model.Product,rsp *products.Response_ProductInfo){
 	rsp.ProductDescription = req.ProductDescription
 	rsp.ProductRfid = req.Rfid
 	rsp.ProductName = req.ProductName
+	rsp.ThreeUrl = req.ThreeD
 }
