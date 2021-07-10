@@ -12,4 +12,5 @@ type Product struct{
 	Location string `json:"location"`//最新的定位信息
 	Rfid string `json:"rfid" gorm:"unique_index;not_null"`//rfid标记
 	ImageID int64 `json:"image_id"`//图片地址对应的id（可上传）
+	ThreeD string `json:"three_d"`//模型URL地址
 }

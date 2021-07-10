@@ -22,7 +22,6 @@ import (
 
 func main() {
 	consulConfig,err := common.GetConsualConfig("1.116.62.214",8500,"/micro/config")
-
 	//配置中心
 	if err != nil{
 		log.Fatal(err)
