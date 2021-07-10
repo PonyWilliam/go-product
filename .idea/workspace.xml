@@ -83,9 +83,6 @@
       <change beforePath="$PROJECT_DIR$/../dockerenv/promethueus.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../dockerenv/promethueus.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../dockerenv/temp.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../dockerenv/temp.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/product.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/product.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/product.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/product.pb.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/product.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/product.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../qrcode/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../qrcode/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../qrcode/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../qrcode/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../qrcode/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../qrcode/Dockerfile" afterDir="false" />
